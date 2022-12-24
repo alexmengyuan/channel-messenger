@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Channel {
+  id        Int          @id @default(autoincrement()) @db.UnsignedInt @map("cid")
+  name       String       @unique(map: "tb_channel_uk") @db.VarChar(128)
+  message Message[]
+  @@map("tb_channel")
+}
+
+model Message {
+  id        Int        @id @default(autoincrement()) @db.UnsignedInt @map("mid")
+  title      String     @db.VarChar(64)
+  content    String     @db.VarChar(255)
+  cid        Int        @db.UnsignedInt
+  createAt   DateTime?  @default(now()) @db.DateTime(0)
+  channel Channel @relation(fields: [cid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "tb_message_tb_channel_cid_fk")
+
+  @@index([cid], map: "tb_message_tb_channel_cid_fk")
+  @@map("tb_message")
+}
