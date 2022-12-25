@@ -12,5 +12,6 @@ FROM node:lts-alpine as production-stage
 WORKDIR /app
 COPY --from=build-stage /app/dist ./dist
 COPY --from=build-stage /app/node_modules ./node_modules
+COPY --from=build-stage /app/.env ./
 EXPOSE 3000
 CMD ["node", "./dist/main"]
