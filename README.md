@@ -10,7 +10,7 @@
 项目结构：  
 |-- .env  // 环境变量，数据库链接等  
 |-- db.sql // 数据库创建文件 
-|-- integration-test.md //集成测试文档，graphql 测试用例
+|-- integration-test.md //集成测试文档，graphql 测试用例  
 |-- Dockerfile // docker文件，本地测试过构建和部署  
 |-- Readme.md  
 |-- package.json  
